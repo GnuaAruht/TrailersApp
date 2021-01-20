@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,6 +8,31 @@
     <color name="teal_700">#FF018786</color>
 
     <color name="white">#fafafa</color>
-    <color name="black">#212121</color>
+    <color name="black">#263238</color>
     <color name="grey_500">#bdbdbd</color>
+    <color name="yellow_600">#fdd835</color>
+
+<!--    <color name="primaryColor">#212121</color>-->
+<!--    <color name="primaryLightColor">#484848</color>-->
+<!--    <color name="primaryDarkColor">#000000</color>-->
+<!--    <color name="secondaryColor">#fdd835</color>-->
+<!--    <color name="secondaryLightColor">#ffff6b</color>-->
+<!--    <color name="secondaryDarkColor">#c6a700</color>-->
+<!--    <color name="primaryTextColor">#ffffff</color>-->
+<!--    <color name="secondaryTextColor">#000000</color>-->
+
+
+    <color name="primaryColor">#212121</color>
+    <color name="colorOnPrimary">#fafafa</color>
+
+    <color name="secondaryColor">#fbc02d</color>
+    <color name="colorOnSecondary">#fafafa</color>
+
+    <color name="backgroundColor">#212121</color>
+    <color name="colorOnBackground">#fafafa</color>
+
+    <color name="colorSurface">#212121</color>
+    <color name="colorOnSurface">#fafafa</color>
+
+
 </resources>

@@ -3,6 +3,9 @@ package com.thuraaung.trailersapp.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
+import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -21,22 +24,16 @@ class MovieLoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<Mo
 
 class MovieLoadStateViewHolder(view : View,retry : () -> Unit) : RecyclerView.ViewHolder(view) {
 
-//    private val tvLoadingError = view.findViewById<TextView>(R.id.tv_loading_error)
-//    private val btnReload = view.findViewById<Button>(R.id.btn_reload)
-//    private val loadingProgress = view.findViewById<ProgressBar>(R.id.loading_progress)
+    private val imgRefresh = view.findViewById<ImageView>(R.id.img_refresh)
+    private val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
 
     init {
         view.setOnClickListener { retry.invoke() }
     }
 
     fun bind(loadState : LoadState) {
-
-//        if (loadState is LoadState.Error) {
-//            tvLoadingError.text = "Loading Error"
-//        }
-//        loadingProgress.isVisible(loadState is LoadState.Loading)
-//        btnReload.isVisible(loadState !is LoadState.Loading)
-//        tvLoadingError.isVisible(loadState !is LoadState.Loading)
+        progressBar.isVisible = loadState is LoadState.Loading
+        imgRefresh.isVisible = loadState !is LoadState.Loading
     }
 
     companion object {

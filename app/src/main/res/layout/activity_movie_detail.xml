@@ -1,60 +1,272 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.MovieDetailActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="120dp"
-        android:layout_height="200dp"
-        app:srcCompat="@drawable/poster_placeholder" />
+    <data>
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:fitsSystemWindows="true"
-        android:background="#f00"
+        <variable
+            name="viewModel"
+            type="com.thuraaung.trailersapp.vm.MovieDetailViewModel" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        android:layout_height="match_parent"
+        tools:context=".activity.MovieDetailActivity">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary">
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
 
-            <ImageView
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="500dp"
                 android:fitsSystemWindows="true"
-                android:src="@drawable/ic_launcher_background"
-                android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax"/>
+                app:contentScrim="?colorPrimary"
+                app:collapsedTitleTextAppearance="@style/TextAppearance.App.Title"
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                <ImageView
+                    android:id="@+id/img_poster"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
+                    android:scaleType="fitXY"
+                    imageUrl="@{viewModel.movie.posterUrl}"
+                    android:src="@drawable/ic_launcher_background"
+                    app:layout_collapseMode="parallax" />
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/tool_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:layout_gravity="top"
+                    app:layout_collapseMode="pin"
+                    style="@style/Widget.App.Toolbar"/>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_margin="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                android:layout_gravity="top"
-                android:layout_marginBottom="?attr/actionBarSize" />
+                android:layout_height="wrap_content">
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_title"
+                    android:text="@{viewModel.movie.title}"
+                    tools:text="Movie title"
+                    android:textAllCaps="true"
+                    android:maxLines="2"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="40dp"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-    <RelativeLayout
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_margin="8dp"
-        android:padding="4dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:text="Year"
+                            android:drawableStart="@drawable/ic_calendar_24"
+                            android:drawablePadding="4dp"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_year"
+                            tools:text="2020"
+                            android:text="@{viewModel.movie.releaseYear}"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
 
 
-    </RelativeLayout>
+                    </LinearLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent" />
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:text="Duration"
+                            android:drawableStart="@drawable/ic_timer_24"
+                            android:drawablePadding="2dp"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_duration"
+                            android:text="@{viewModel.movie.duration}"
+                            tools:text="2hr 12min"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:text="Rating"
+                            android:drawableStart="@drawable/ic_star_outline_24"
+                            android:drawablePadding="2dp"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_rating"
+                            android:text="@{viewModel.movie.rating}"
+                            tools:text="7.8/10"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_genres"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:text="Genres"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chip_group"
+                        chipData="@{viewModel.movie.genres}"
+                        android:layout_margin="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+<!--                        <com.google.android.material.chip.Chip-->
+<!--                            android:id="@+id/chip1"-->
+<!--                            android:text="Comedy"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content" />-->
+
+<!--                        <com.google.android.material.chip.Chip-->
+<!--                            android:id="@+id/chip2"-->
+<!--                            android:text="Action"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content" />-->
+
+<!--                        <com.google.android.material.chip.Chip-->
+<!--                            android:id="@+id/chip3"-->
+<!--                            android:text="Drama"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content" />-->
+
+<!--                        <com.google.android.material.chip.Chip-->
+<!--                            android:id="@+id/chip4"-->
+<!--                            android:text="Thriller"-->
+<!--                            android:checkable="false"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content" />-->
+
+                    </com.google.android.material.chip.ChipGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_overview"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:text="Overview"
+                        android:layout_marginBottom="4dp"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_overview"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:text="@{viewModel.movie.overview}"
+                        tools:text="@string/sample_text"
+                        android:layout_margin="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_play"
+            app:fabSize="normal"
+            android:onClick="@{()-> viewModel.openMovieTrailer(viewModel.movie.id)}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_anchor="@id/app_bar"
+            app:layout_anchorGravity="bottom|end"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_play_arrow_24" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

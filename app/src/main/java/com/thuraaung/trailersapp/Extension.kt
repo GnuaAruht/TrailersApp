@@ -1,7 +1,11 @@
 package com.thuraaung.trailersapp
 
-import android.view.View
+import android.content.Context
+import com.google.android.material.chip.Chip
 
-fun View.isVisible(isVisible : Boolean) {
-    visibility = if (isVisible) View.VISIBLE else View.GONE
+fun Context.createChip(t : String) : Chip {
+    return Chip(this).apply {
+        text = t
+        isCheckable = false
+    }
 }

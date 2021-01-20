@@ -1,20 +1,17 @@
 package com.thuraaung.trailersapp.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.thuraaung.trailersapp.model.Movie
 import com.thuraaung.trailersapp.R
+import com.thuraaung.trailersapp.databinding.LayoutMovieItemBinding
+import com.thuraaung.trailersapp.model.Movie
 
-class MoviesAdapter(private val itemClickListener : (Movie?) -> Unit) : PagingDataAdapter<Movie, MoviesAdapter.MovieViewHolder>(
-    MOVIE_COMPARATOR
-) {
+class MoviesAdapter(private val itemClickListener : (Movie?) -> Unit)
+    : PagingDataAdapter<Movie, MoviesAdapter.MovieViewHolder>(MOVIE_COMPARATOR) {
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = getItem(position)
@@ -24,23 +21,20 @@ class MoviesAdapter(private val itemClickListener : (Movie?) -> Unit) : PagingDa
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_movie_item,parent,false)
-        return MovieViewHolder(view)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = LayoutMovieItemBinding.inflate(layoutInflater,parent,false)
+        return MovieViewHolder(binding)
     }
 
-    inner class MovieViewHolder(view : View) : RecyclerView.ViewHolder(view) {
-
-        private val tvMovie = view.findViewById<TextView>(R.id.tv_movie)
-        private val imgPoster = view.findViewById<ImageView>(R.id.img_poster)
+    inner class MovieViewHolder(private val binding : LayoutMovieItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         init {
-            view.setOnClickListener { itemClickListener.invoke(getItem(adapterPosition)) }
+            binding.root.setOnClickListener { itemClickListener.invoke(getItem(adapterPosition)) }
         }
 
         fun bind(movie : Movie) {
-            tvMovie.text = movie.title
-            imgPoster.load(movie.posterUrl) {
+            binding.tvMovie.text = movie.title
+            binding.imgPoster.load(movie.posterUrl) {
                 crossfade(true)
                 placeholder(R.drawable.poster_placeholder)
             }

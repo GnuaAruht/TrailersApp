@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.App.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">?colorOnBackground</item>
+    </style>
+
+    <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
+    <style name="TextAppearance.App.Title" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">?colorOnPrimary</item>
+    </style>
+
+    <style name="Widget.app.Chip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipBackgroundColor">?colorSecondary</item>
+        <item name="android:textColor">?colorPrimary</item>
+    </style>
+
+</resources>
