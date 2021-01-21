@@ -7,25 +7,47 @@ import androidx.paging.PagingData
 import com.thuraaung.trailersapp.api.MovieService
 import com.thuraaung.trailersapp.model.Movie
 import com.thuraaung.trailersapp.model.MovieDetail
+import com.thuraaung.trailersapp.model.MovieType
 import com.thuraaung.trailersapp.model.MovieVideo
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class MovieRepository @Inject constructor(
-    private val service : MovieService,
-    private val database : MovieDatabase
+    private val service : MovieService
 ) {
 
     @ExperimentalPagingApi
-    fun getMoviesList() : Flow<PagingData<Movie>> {
+    fun getMoviesByType(movieType : MovieType) : Flow<PagingData<Movie>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 1,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { MoviePagingSource(service) }
+            pagingSourceFactory = { MoviePagingSource(service,movieType) }
         ).flow
     }
+//
+//    @ExperimentalPagingApi
+//    fun getMoviesList() : Flow<PagingData<Movie>> {
+//        return Pager(
+//            config = PagingConfig(
+//                pageSize = 1,
+//                enablePlaceholders = false
+//            ),
+//            pagingSourceFactory = { MoviePagingSource(service) }
+//        ).flow
+//    }
+//
+//    @ExperimentalPagingApi
+//    fun getMoviesList() : Flow<PagingData<Movie>> {
+//        return Pager(
+//            config = PagingConfig(
+//                pageSize = 1,
+//                enablePlaceholders = false
+//            ),
+//            pagingSourceFactory = { MoviePagingSource(service) }
+//        ).flow
+//    }
 
     suspend fun getMovieById(movieId : Int) : MovieDetail? {
 
@@ -42,23 +64,4 @@ class MovieRepository @Inject constructor(
         }
     }
 
-    suspend fun getMovieVideo(movieId : Int) : MovieVideo? {
-
-        return try {
-            val apiResponse = service.getMovieVideo(movieId)
-            if (apiResponse.isSuccessful) {
-                apiResponse.body()?.let {
-                    if (!it.results.isNullOrEmpty()) {
-                        it.results[0]
-                    } else null
-                }
-
-            } else {
-                null
-            }
-        } catch (e : Exception) {
-            e.printStackTrace()
-            null
-        }
-    }
 }

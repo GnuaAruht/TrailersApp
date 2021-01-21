@@ -6,4 +6,9 @@
     <string name="watch_trailer">Watch trailer</string>
     <string name="very_long_movie_title">Very very very very very very long movie title</string>
     <string name="movie_title">Movie title</string>
+    <string name="now_playing">Now playing</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="top_rated">Top rated</string>
+    <string name="popular">Popular</string>
+    <string name="retry">Retry</string>
 </resources>

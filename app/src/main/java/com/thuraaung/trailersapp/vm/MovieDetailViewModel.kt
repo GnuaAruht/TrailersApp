@@ -1,41 +1,40 @@
 package com.thuraaung.trailersapp.vm
 
+import android.util.Log
+import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.thuraaung.trailersapp.Event
-import com.thuraaung.trailersapp.data.MovieRepository
+import androidx.lifecycle.*
+import com.thuraaung.trailersapp.api.DataResult
+import com.thuraaung.trailersapp.data.MovieDetailRepository
 import com.thuraaung.trailersapp.model.MovieDetail
 import com.thuraaung.trailersapp.model.MovieVideo
-import kotlinx.coroutines.Dispatchers
+import com.thuraaung.trailersapp.utils.Event
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MovieDetailViewModel @ViewModelInject constructor(
-    private val repository : MovieRepository
+    private val repository : MovieDetailRepository,
+    @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _movie = MutableLiveData<MovieDetail?>()
-    val movie : LiveData<MovieDetail?>
-        get() = _movie
+    private val movieId : Int by lazy {
+        savedStateHandle.get<Int>("movie_id")!!
+    }
 
     private val _eventMovieVideo = MutableLiveData<Event<MovieVideo>>()
     val eventMovieVideo : LiveData<Event<MovieVideo>>
         get() = _eventMovieVideo
 
-    fun getMovieById(movieId : Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            _movie.postValue(repository.getMovieById(movieId))
-        }
+    val movieDetailResult : LiveData<DataResult<MovieDetail>> = liveData {
+        repository.getMovieById(movieId)
+            .collect { emit(it) }
     }
 
-    fun openMovieTrailer(movieId : Int) {
-
+    fun openMovieTrailer() {
         viewModelScope.launch {
             repository.getMovieVideo(movieId)?.let { movieVideo ->
                 _eventMovieVideo.postValue(Event(movieVideo))
-            }
+            } ?: Log.d("Movie video","Trailer cannot be play")
         }
 
     }

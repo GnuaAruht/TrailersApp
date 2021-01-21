@@ -31,5 +31,11 @@
 
         <item name="chipStyle">@style/Widget.app.Chip</item>
 
-</style>
+    </style>
+
+    <style name="ThemeOverlay.App.AlertDialog"
+        parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.App.DialogButton</item>
+    </style>
+
 </resources>

@@ -38,7 +38,7 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
-        dataBinding true
+        viewBinding true
     }
 }
 
@@ -49,6 +49,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // paging
     def pagingVersion = '3.0.0-alpha12'
@@ -82,10 +83,8 @@ dependencies {
     implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
     kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
 
-    def room_version = "2.3.0-alpha02"
-    implementation "androidx.room:room-runtime:2.3.0-alpha04"
-    kapt "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-ktx:2.3.0-alpha04"
+    //lottie
+    implementation "com.airbnb.android:lottie:3.6.0"
 
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.thuraaung.trailersapp.vm.MovieDetailViewModel" />
-
-    </data>
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".activity.MovieDetailActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MovieDetailActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
@@ -25,7 +16,7 @@
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="480dp"
                 android:fitsSystemWindows="true"
                 app:contentScrim="?colorPrimary"
                 app:collapsedTitleTextAppearance="@style/TextAppearance.App.Title"
@@ -34,10 +25,9 @@
                 <ImageView
                     android:id="@+id/img_poster"
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
+                    android:layout_height="480dp"
                     android:scaleType="fitXY"
-                    imageUrl="@{viewModel.movie.posterUrl}"
-                    android:src="@drawable/ic_launcher_background"
+                    android:src="@drawable/poster_placeholder"
                     app:layout_collapseMode="parallax" />
 
                 <com.google.android.material.appbar.MaterialToolbar
@@ -65,7 +55,6 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_title"
-                    android:text="@{viewModel.movie.title}"
                     tools:text="Movie title"
                     android:textAllCaps="true"
                     android:maxLines="2"
@@ -103,7 +92,6 @@
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/tv_year"
                             tools:text="2020"
-                            android:text="@{viewModel.movie.releaseYear}"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -132,7 +120,6 @@
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/tv_duration"
-                            android:text="@{viewModel.movie.duration}"
                             tools:text="2hr 12min"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                             android:layout_width="wrap_content"
@@ -162,7 +149,6 @@
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/tv_rating"
-                            android:text="@{viewModel.movie.rating}"
                             tools:text="7.8/10"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                             android:layout_width="wrap_content"
@@ -190,7 +176,6 @@
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/chip_group"
-                        chipData="@{viewModel.movie.genres}"
                         android:layout_margin="4dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" >
@@ -244,7 +229,6 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_overview"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                        android:text="@{viewModel.movie.overview}"
                         tools:text="@string/sample_text"
                         android:layout_margin="4dp"
                         android:layout_width="match_parent"
@@ -260,7 +244,6 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_play"
             app:fabSize="normal"
-            android:onClick="@{()-> viewModel.openMovieTrailer(viewModel.movie.id)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_anchor="@id/app_bar"
@@ -268,5 +251,4 @@
             android:layout_marginEnd="10dp"
             android:src="@drawable/ic_play_arrow_24" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</layout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

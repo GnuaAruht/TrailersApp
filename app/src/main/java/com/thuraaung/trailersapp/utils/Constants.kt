@@ -1,4 +1,4 @@
-package com.thuraaung.trailersapp
+package com.thuraaung.trailersapp.utils
 
 object Constants {
 

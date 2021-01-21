@@ -37,6 +37,7 @@ class MoviesAdapter(private val itemClickListener : (Movie?) -> Unit)
             binding.imgPoster.load(movie.posterUrl) {
                 crossfade(true)
                 placeholder(R.drawable.poster_placeholder)
+                error(R.drawable.poster_placeholder)
             }
         }
 

@@ -1,7 +1,7 @@
 package com.thuraaung.trailersapp.model
 
 import com.google.gson.annotations.SerializedName
-import com.thuraaung.trailersapp.Constants
+import com.thuraaung.trailersapp.utils.Constants
 
 data class MovieDetail(
     val id : Int,

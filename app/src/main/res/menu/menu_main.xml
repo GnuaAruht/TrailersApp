@@ -2,15 +2,28 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/app_bar_search"
-        android:title="Search"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_search_black_24dp"
-        app:actionViewClass="android.widget.SearchView" />
+<!--    <item-->
+<!--        android:id="@+id/app_bar_search"-->
+<!--        android:title="Search"-->
+<!--        app:showAsAction="ifRoom"-->
+<!--        android:icon="@drawable/ic_search_black_24dp"-->
+<!--        app:actionViewClass="android.widget.SearchView" />-->
 
-    <item android:title="Item 1" />
-    <item android:title="Item 2" />
-    <item android:title="Item 3" />
+    <item
+        android:id="@+id/now_playing"
+        app:showAsAction="never"
+        android:title="@string/now_playing" />
+
+    <item
+        android:id="@+id/upcoming"
+        app:showAsAction="never"
+        android:title="@string/upcoming" />
+
+
+    <item
+        android:id="@+id/top_rated"
+        app:showAsAction="never"
+        android:title="@string/top_rated" />
+
 
 </menu>

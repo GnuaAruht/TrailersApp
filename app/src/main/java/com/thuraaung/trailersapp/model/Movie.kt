@@ -1,13 +1,9 @@
 package com.thuraaung.trailersapp.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import com.thuraaung.trailersapp.Constants.IMAGE_BASE_URL
+import com.thuraaung.trailersapp.utils.Constants.IMAGE_BASE_URL
 
-@Entity(tableName = "movie")
 data class Movie(
-    @PrimaryKey
     val id : Int,
     val title : String,
     @field:SerializedName("poster_path")
