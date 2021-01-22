@@ -62,15 +62,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.rvMovie.apply {
             layoutManager = GridLayoutManager(this@MainActivity,3)
-            adapter = movieAdapter
+            adapter = movieAdapter.withLoadStateHeaderAndFooter(
+                header = MovieLoadStateAdapter { movieAdapter.retry() },
+                footer = MovieLoadStateAdapter { movieAdapter.retry() })
         }
     }
 
     private fun setUpAdapter() {
-
-        movieAdapter.withLoadStateHeaderAndFooter(
-            header = MovieLoadStateAdapter { movieAdapter.retry() },
-            footer = MovieLoadStateAdapter { movieAdapter.retry() })
 
         movieAdapter.addLoadStateListener { loadState ->
             binding.rvMovie.isVisible = loadState.source.refresh is LoadState.NotLoading
